@@ -28,6 +28,8 @@ const loginPage = require("../fixtures/pages/loginPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashBoardPage = require("../fixtures/pages/inviteeDashBoardPage.json");
+const mainPage = require("../fixtures/pages/mainPage.json");
+
 
 Cypress.Commands.add("login", (userName, password) => {
   cy.get(loginPage.loginField).type(userName);
@@ -54,3 +56,9 @@ Cypress.Commands.add("goToLoginForm", (inviteLink) => {
   cy.get(generalElements.submitButton).click();
   cy.contains("войдите").click();
 });
+
+Cypress.Commands.add("checkAndReadNotifications", (newBoxName) => { 
+cy.get(mainPage.notifications).click();//нажать на кнопку уведомления
+cy.get(mainPage.notificationMessage).should("have.text", `У тебя появился подопечный в коробке "${newBoxName}". Скорее переходи по кнопке, чтобы узнать кто это!`)
+cy.get(mainPage.readNotifications).click(); //отметить все уведомления прочитанными
+ })

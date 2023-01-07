@@ -134,9 +134,24 @@ describe("User can create box and run it", () => {
     cy.get(quickDrowElements.goToDraw).click({force: true})
     cy.get(generalElements.submitButton).click();
     cy.get(quickDrowElements.confirmationOfDraw).click();
-    //cy.clearCookies();
+    cy.clearCookies();
   });
+  it('checking notifications for user1', () => {
+    cy.visit("/login");
+    cy.login(users.user1.email, users.user1.password);
+    cy.checkAndReadNotifications(newBoxName);
+    cy.clearCookies();
 
+    cy.visit("/login");
+    cy.login(users.user2.email, users.user2.password);
+    cy.checkAndReadNotifications(newBoxName);
+    cy.clearCookies();
+    
+    cy.visit("/login");
+    cy.login(users.user3.email, users.user3.password);
+    cy.checkAndReadNotifications(newBoxName);
+    cy.clearCookies();
+  });
 
   after("delete box", () => {
     cy.visit("/login");
