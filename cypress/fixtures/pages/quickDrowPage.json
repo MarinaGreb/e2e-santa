@@ -1,0 +1,11 @@
+{
+    "name1thParticipant": ":nth-child(3) > .frm-wrapper",
+    "email1thParticipant": ":nth-child(4) > .frm-wrapper",
+    "name2thParticipant": ":nth-child(5) > .frm-wrapper",
+    "email2thParticipant": ":nth-child(6) > .frm-wrapper",
+    "name3thParticipant": ":nth-child(7) > .frm-wrapper",
+    "email3thParticipant": ":nth-child(8) > .frm-wrapper",
+    "noticeQuickDrow": ".picture-notice__title",
+    "goToDraw": "a > .txt-secondary--med",
+    "confirmationOfDraw": ".santa-modal_content_buttons > .btn-main"
+}

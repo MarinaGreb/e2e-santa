@@ -3,6 +3,8 @@ const boxPage = require("../fixtures/pages/boxPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
 const dashBordPage = require("../fixtures/pages/dashBoardPage.json");
+const mainPage = require("../fixtures/pages/mainPage.json");
+const quickDrowElements = require("../fixtures/pages/quickDrowPage.json");
 
 import { faker } from "@faker-js/faker";
 
@@ -22,7 +24,13 @@ describe("User can create box and run it", () => {
   let maxAmount = 50;
   let currency = "Евро";
   let inviteLink;
-  let wishes =faker.word.noun() +" " +faker.word.adjective() +" " +faker.word.adverb();
+  let boxKey;
+  let wishes =
+    faker.word.noun() +
+    " " +
+    faker.word.adjective() +
+    " " +
+    faker.word.adverb();
 
   it("user logins and create a box", () => {
     cy.visit("/login");
@@ -31,9 +39,10 @@ describe("User can create box and run it", () => {
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);
     cy.get(boxPage.boxKeyField).then((key) => {
-      const boxKey = Cypress.$(key).val(); //Сохранение значения из поля Идентификатор в переменную boxKey
+      boxKey = Cypress.$(key).val(); //Сохранение значения из поля Идентификатор в переменную boxKey
       cy.log(boxKey);
     });
+    // cy.log(boxKey);
     cy.get(generalElements.arrowRight).click();
 
     cy.get(boxPage.sixthIcon).click();
@@ -49,7 +58,7 @@ describe("User can create box and run it", () => {
     // cy.get(generalElements.arrowRight).click();
 
     cy.get(dashBordPage.createdBoxName).should("have.text", newBoxName);
-    cy.get(".layout-1__header-wrapper-fixed .toggle-menu-item span")
+    cy.get(dashBordPage.toggleMenu)
       .invoke("text")
       .then((text) => {
         cy.log(text);
@@ -68,27 +77,66 @@ describe("User can create box and run it", () => {
     cy.clearCookies();
   });
   it("approve as user1", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации 
+    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
     cy.login(users.user1.email, users.user1.password);
     cy.creatingUserCard(wishes);
     cy.clearCookies();
   });
 
   it("approve as user2", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации 
+    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
     cy.login(users.user2.email, users.user2.password);
-    wishes =faker.word.noun() +" " +faker.word.adjective() +" " +faker.word.adverb()
+    wishes =
+      faker.word.noun() +
+      " " +
+      faker.word.adjective() +
+      " " +
+      faker.word.adverb();
     cy.creatingUserCard(wishes);
     cy.clearCookies();
   });
 
   it("approve as user3", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации 
+    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
     cy.login(users.user3.email, users.user3.password);
-    wishes =faker.word.noun() +" " +faker.word.adjective() +" " +faker.word.adverb()
+    wishes =
+      faker.word.noun() +
+      " " +
+      faker.word.adjective() +
+      " " +
+      faker.word.adverb();
     cy.creatingUserCard(wishes);
     cy.clearCookies();
   });
+
+  // it('quick draw start', () => {
+  //   cy.visit("/login");
+  //   cy.login(users.userAuthor.email, users.userAuthor.password);
+  //   cy.get(mainPage.quickDrawButton).click();
+  //   cy.get(generalElements.arrowRight).click();
+  //   cy.get(quickDrowElements.name1thParticipant).type(users.user1.name);
+  //   cy.get(quickDrowElements.email1thParticipant).type(users.user1.email)
+  //   cy.get(quickDrowElements.name2thParticipant).type(users.user2.name);
+  //   cy.get(quickDrowElements.email2thParticipant).type(users.user2.email)
+  //   cy.get(quickDrowElements.name3thParticipant).type(users.user3.name);
+  //   cy.get(quickDrowElements.email3thParticipant).type(users.user3.email)
+  //   cy.get(generalElements.arrowRight).click();
+  //   cy.get(generalElements.arrowRight).click();
+  //   cy.get(quickDrowElements.noticeQuickDrow).should("have.text", "Жеребьевка проведена!");
+  // });
+
+  it("draw from the box", () => {
+    cy.visit("/login");
+    cy.login(users.userAuthor.email, users.userAuthor.password);
+    cy.log(boxKey);
+    cy.visit(`/box/${boxKey}`);
+   // cy.visit(`/box/D7keGg`);
+    cy.get(quickDrowElements.goToDraw).click({force: true})
+    cy.get(generalElements.submitButton).click();
+    cy.get(quickDrowElements.confirmationOfDraw).click();
+    //cy.clearCookies();
+  });
+
 
   after("delete box", () => {
     cy.visit("/login");
