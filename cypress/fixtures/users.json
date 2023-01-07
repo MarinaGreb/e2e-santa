@@ -1,22 +1,22 @@
 {
-  "userAutor": {
-    "email": "ommelnikova+test@gmail.com",
-    "password": "test1234",
-    "name": "oksana-autor"
+  "userAuthor": {
+    "email": "sokovets@outlook.com",
+    "password": "123456",
+    "name": "marina-Author"
   },
   "user1": {
-    "email": "ommelnikova+test1@gmail.com",
-    "password": "test1234",
-    "name": "oksana1"
+    "email": "sokovets+1@outlook.com",
+    "password": "123456",
+    "name": "marina1"
   },
   "user2": {
-    "email": "ommelnikova+test2@gmail.com",
-    "password": "test1234",
-    "name": "oksana2"
+    "email": "sokovets+2@outlook.com",
+    "password": "123456",
+    "name": "marina2"
   },
   "user3": {
-    "email": "ommelnikova+test3@gmail.com",
-    "password": "test1234",
-    "name": "oksana3"
+    "email": "sokovets+3@outlook.com",
+    "password": "123456",
+    "name": "marina3"
   }
 }

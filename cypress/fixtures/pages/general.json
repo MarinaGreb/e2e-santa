@@ -1,4 +1,5 @@
 {
-  "arrowRight": ".btn-arrow-right",
+  "arrowRight" : ".btn-arrow-right",
+  "layoutSelector": ".layout-1__main",
   "submitButton": ".btn-main"
 }
