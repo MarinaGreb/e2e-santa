@@ -6,6 +6,7 @@ const dashBordPage = require("../fixtures/pages/dashBoardPage.json");
 const mainPage = require("../fixtures/pages/mainPage.json");
 const quickDrowElements = require("../fixtures/pages/quickDrowPage.json");
 
+let cookie = "connect.sid=s%3A-yoJwYfe1GtvrcbCV4LxyYhtrw904USQ.j1nLxDaLGuUt%2Br%2Bj%2FBCC2AcocFkeI32X9H96F8nClJc";
 import { faker } from "@faker-js/faker";
 
 describe("User can create box and run it", () => {
@@ -146,27 +147,22 @@ describe("User can create box and run it", () => {
     cy.login(users.user2.email, users.user2.password);
     cy.checkAndReadNotifications(newBoxName);
     cy.clearCookies();
-    
+
     cy.visit("/login");
     cy.login(users.user3.email, users.user3.password);
     cy.checkAndReadNotifications(newBoxName);
     cy.clearCookies();
   });
 
-  after("delete box", () => {
-    cy.visit("/login");
-    cy.login(users.userAuthor.email, users.userAuthor.password);
-    cy.get(
-      '.layout-1__header-wrapper-fixed [href="/account/boxes"] > .header-item'
-    ).click();
-    cy.get(".user-card").first().click();
-    cy.get(
-      ".layout-1__header-wrapper-fixed .toggle-menu-button--inner"
-    ).click();
-    cy.contains("Архивация и удаление").click({ force: true });
-    cy.get(":nth-child(2) > .form-page-group__main .frm").type(
-      "Удалить коробку"
-    );
-    cy.get(".btn-service").click();
+  after("Delete Box", () => {
+    cy.request({
+      method: "DELETE",
+      headers: {
+        Cookie: cookie,
+      },
+      url: `/api/box/${boxKey}`,
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    });
   });
 });
