@@ -7,5 +7,6 @@
     "email3thParticipant": ":nth-child(8) > .frm-wrapper",
     "noticeQuickDrow": ".picture-notice__title",
     "goToDraw": "a > .txt-secondary--med",
-    "confirmationOfDraw": ".santa-modal_content_buttons > .btn-main"
+    "confirmationOfDraw": ".santa-modal_content_buttons > .btn-main",
+    "countOfusersCardPic": ".user-card-mini__pic"
 }

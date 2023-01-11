@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^15.1.0",
     "@faker-js/faker": "^7.6.0"
   },
   "devDependencies": {
-    "cypress": "^12.3.0"
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "cypress": "^12.3.0",
+    "esbuild": "^0.16.16"
   }
 }

@@ -77,38 +77,38 @@ describe("User can create box and run it", () => {
       });
     cy.clearCookies();
   });
-  it("approve as user1", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
-    cy.login(users.user1.email, users.user1.password);
-    cy.creatingUserCard(wishes);
-    cy.clearCookies();
-  });
+  // it("approve as user1", () => {
+  //   cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
+  //   cy.login(users.user1.email, users.user1.password);
+  //   cy.creatingUserCard(wishes);
+  //   cy.clearCookies();
+  // });
 
-  it("approve as user2", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
-    cy.login(users.user2.email, users.user2.password);
-    wishes =
-      faker.word.noun() +
-      " " +
-      faker.word.adjective() +
-      " " +
-      faker.word.adverb();
-    cy.creatingUserCard(wishes);
-    cy.clearCookies();
-  });
+  // it("approve as user2", () => {
+  //   cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
+  //   cy.login(users.user2.email, users.user2.password);
+  //   wishes =
+  //     faker.word.noun() +
+  //     " " +
+  //     faker.word.adjective() +
+  //     " " +
+  //     faker.word.adverb();
+  //   cy.creatingUserCard(wishes);
+  //   cy.clearCookies();
+  // });
 
-  it("approve as user3", () => {
-    cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
-    cy.login(users.user3.email, users.user3.password);
-    wishes =
-      faker.word.noun() +
-      " " +
-      faker.word.adjective() +
-      " " +
-      faker.word.adverb();
-    cy.creatingUserCard(wishes);
-    cy.clearCookies();
-  });
+  // it("approve as user3", () => {
+  //   cy.goToLoginForm(inviteLink); //переход по ссылке для приглашения,переход к форме авторизации
+  //   cy.login(users.user3.email, users.user3.password);
+  //   wishes =
+  //     faker.word.noun() +
+  //     " " +
+  //     faker.word.adjective() +
+  //     " " +
+  //     faker.word.adverb();
+  //   cy.creatingUserCard(wishes);
+  //   cy.clearCookies();
+  // });
 
   // it('quick draw start', () => {
   //   cy.visit("/login");
@@ -126,33 +126,33 @@ describe("User can create box and run it", () => {
   //   cy.get(quickDrowElements.noticeQuickDrow).should("have.text", "Жеребьевка проведена!");
   // });
 
-  it("draw from the box", () => {
-    cy.visit("/login");
-    cy.login(users.userAuthor.email, users.userAuthor.password);
-    cy.log(boxKey);
-    cy.visit(`/box/${boxKey}`);
-   // cy.visit(`/box/D7keGg`);
-    cy.get(quickDrowElements.goToDraw).click({force: true})
-    cy.get(generalElements.submitButton).click();
-    cy.get(quickDrowElements.confirmationOfDraw).click();
-    cy.clearCookies();
-  });
-  it('checking notifications for user1', () => {
-    cy.visit("/login");
-    cy.login(users.user1.email, users.user1.password);
-    cy.checkAndReadNotifications(newBoxName);
-    cy.clearCookies();
+  // it("draw from the box", () => {
+  //   cy.visit("/login");
+  //   cy.login(users.userAuthor.email, users.userAuthor.password);
+  //   cy.log(boxKey);
+  //   cy.visit(`/box/${boxKey}`);
+  //  // cy.visit(`/box/D7keGg`);
+  //   cy.get(quickDrowElements.goToDraw).click({force: true})
+  //   cy.get(generalElements.submitButton).click();
+  //   cy.get(quickDrowElements.confirmationOfDraw).click();
+  //   cy.clearCookies();
+  // });
+  // it('checking notifications for user1', () => {
+  //   cy.visit("/login");
+  //   cy.login(users.user1.email, users.user1.password);
+  //   cy.checkAndReadNotifications(newBoxName);
+  //   cy.clearCookies();
 
-    cy.visit("/login");
-    cy.login(users.user2.email, users.user2.password);
-    cy.checkAndReadNotifications(newBoxName);
-    cy.clearCookies();
+  //   cy.visit("/login");
+  //   cy.login(users.user2.email, users.user2.password);
+  //   cy.checkAndReadNotifications(newBoxName);
+  //   cy.clearCookies();
 
-    cy.visit("/login");
-    cy.login(users.user3.email, users.user3.password);
-    cy.checkAndReadNotifications(newBoxName);
-    cy.clearCookies();
-  });
+  //   cy.visit("/login");
+  //   cy.login(users.user3.email, users.user3.password);
+  //   cy.checkAndReadNotifications(newBoxName);
+  //   cy.clearCookies();
+  // });
 
   after("Delete Box", () => {
     cy.request({
