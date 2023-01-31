@@ -4,18 +4,26 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "cy:run": "cypress run",
-    "cy:open": "npx cypress open"
+    "cy:run": "cypress run --env allure=true",
+    "clean:folder": "del-cli --force ./allure-results/*",
+    "cy:open": "npx cypress open",
+    "allure:report": "allure serve",
+    "beforetest": "npm run clean:folder",
+    "tests": "npm run cy:run || npm run allure:report"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.0",
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "del-cli": "^5.0.0"
   },
   "devDependencies": {
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@shelex/cypress-allure-plugin": "^2.34.0",
+    "allure-commandline": "^2.20.1",
     "cypress": "^12.3.0",
-    "esbuild": "^0.16.16"
+    "esbuild": "^0.16.16",
+    "mocha-allure-reporter": "^1.4.0"
   }
 }
